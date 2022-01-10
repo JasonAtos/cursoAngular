@@ -36,5 +36,29 @@ export class HeroesService {
     return temp;
   }
 
+  getHeroes(){
+    return this.http.get(`${this.url}heroes.json`)
+    .pipe(map(this.crearArreglo));
+  }
+
+  private crearArreglo(heroesObj: any){
+    if(heroesObj === null) return [];
+
+    const heroes: HeroeModel[] = [];
+    Object.keys(heroesObj).forEach(key => {
+      const hero: HeroeModel = heroesObj[key];
+      hero.id = key;
+      heroes.push(hero);
+    });
+    return heroes;
+  }
+
+  getHeroeById(id: string) {
+    return this.http.get(`${this.url}heroes/${id}.json`);
+  }
+
+  borrarHeroe(id:string){
+    return this.http.delete(`${this.url}heroes/${id}.json`);
+  }
 
 }
