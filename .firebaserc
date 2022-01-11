@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "firechat-e014f": {
+      "hosting": {
+        "spotiApp": [
+          "firechat-e014f"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "firechat-e014f"
+  }
+}

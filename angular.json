@@ -98,6 +98,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "spotiApp:build:production",
+            "firebaseProject": "firechat-e014f",
+            "firebaseHostingSite": "firechat-e014f"
+          }
         }
       }
     }
