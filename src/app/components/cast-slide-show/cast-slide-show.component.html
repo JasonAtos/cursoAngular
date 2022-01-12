@@ -1,0 +1,18 @@
+<div class="swiper">  
+    <div class="swiper-wrapper">
+  
+      <div class="swiper-slide" 
+      *ngFor="let item of cast">
+        <div class="movie-description">
+          <p>{{item.name}}</p>
+          <img
+            class="img-thumbnail"
+            [src]="item.profile_path | poster " 
+            alt="...">
+          <!-- <p>{{item.character | slice: 0 : 130 }}</p> -->
+        </div>
+      </div>
+  
+    </div>  
+    <div class="swiper-pagination"></div>
+  </div>
