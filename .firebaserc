@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "grafica-7ebfb": {
+      "hosting": {
+        "spotiApp": [
+          "grafica-7ebfb"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "grafica-7ebfb"
+  }
+}

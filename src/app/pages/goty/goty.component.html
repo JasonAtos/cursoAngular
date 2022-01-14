@@ -1,0 +1,15 @@
+<h2>Vota</h2>
+<hr>
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    <div class="col" *ngFor="let item of juegos" >
+      <div class="card h-100">
+        <img [src]="item.url" class="card-img-top" alt="...">
+        <div class="card-body bg-dark text-center">
+          <h5 class="card-title">{{item.name}}</h5>
+          <p class="card-text">Click aqui para votar!!!</p>
+          <button type="button" class="btn btn-outline-primary" (click)="votar(item)" >Votar</button>
+          
+        </div>
+      </div>
+    </div>
+</div>

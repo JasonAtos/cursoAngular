@@ -98,6 +98,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "spotiApp:build:production",
+            "firebaseProject": "grafica-7ebfb",
+            "firebaseHostingSite": "grafica-7ebfb"
+          }
         }
       }
     }
