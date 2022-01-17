@@ -1,6 +1,6 @@
 import { FormBuilder } from '@angular/forms';
 import { FormularioRegister } from './formulario';
-describe('Formularios', () => {
+xdescribe('Formularios', () => {
     let componente: FormularioRegister;
 
     beforeEach(() => {

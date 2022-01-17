@@ -1,5 +1,5 @@
 import { incrementar } from './numeros';
-describe('Pruebas de Numeros', () => {
+xdescribe('Pruebas de Numeros', () => {
 
     it('Debe retornar 100', () => {
         const r = incrementar(300);

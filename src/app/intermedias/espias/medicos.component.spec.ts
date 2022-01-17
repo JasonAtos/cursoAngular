@@ -4,7 +4,7 @@ import { MedicosComponent } from './medicos.component';
 import { MedicosService } from './medicos.service';
 
 
-describe('MedicosComponent', () => {
+xdescribe('MedicosComponent', () => {
     const httpClient = new HttpClient(new HttpXhrBackend({ 
         build: () => new XMLHttpRequest() 
     }));

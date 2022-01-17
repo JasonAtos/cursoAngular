@@ -2,7 +2,7 @@ import { mensaje } from './string';
 // describe('Prueba a strings');
 // it('Debe de');
 
-describe('Pruebas de String', () => {
+xdescribe('Pruebas de String', () => {
 
     it('Debe regresar un string', () => {
         const x = mensaje('Jason');

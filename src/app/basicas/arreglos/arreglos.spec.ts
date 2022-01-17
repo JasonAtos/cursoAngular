@@ -1,5 +1,5 @@
 import { getRobots } from './arrreglos';
-describe('Prueba de arreglos', () => {
+xdescribe('Prueba de arreglos', () => {
     
     it('Debe tener 3 robots', () => {
         const r = getRobots();
