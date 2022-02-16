@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angulartest-8f3a0": {
+      "hosting": {
+        "spotiApp": [
+          "angulartest-8f3a0"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angulartest-8f3a0"
+  }
+}
