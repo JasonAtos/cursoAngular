@@ -32,7 +32,7 @@ import { AppRoutingModule } from './app-routing.module';
     MaterialModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [MaterialModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
