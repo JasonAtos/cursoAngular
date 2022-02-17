@@ -13,6 +13,12 @@ export class UserService {
       email: 'jhon@gmail.com',
       password: '123456',
     },
+    {
+      id: 2,
+      name: 'John Doe',
+      email: 'jhon@gmail.com',
+      password: '123456',
+    },
   ];
   constructor() {}
   public getUsers(): Observable<User[]> {
