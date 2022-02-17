@@ -37,8 +37,7 @@ export class UserService {
   constructor(firestore: Firestore) {
     /* this.collection2 = firestore.collection<User>(firestore, 'Users'); */
     /* collectionData(this.collection2).subscribe(console.log); */
-    this.collection2 = collection(firestore, 'items');
-    this.item$ = collectionData(this.collection2);
+    this.collection2 = collection(firestore, 'Users');
   }
   public getUsers(): Observable<User[]> {
     this.item$ = collectionData(this.collection2);
