@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { User } from '../../../models/user';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import {
   Firestore,
   collectionData,
@@ -10,9 +11,6 @@ import {
 } from '@angular/fire/firestore';
 
 /*  import { User } from '@models/user'; */
-export interface Item {
-  name: string;
-}
 @Injectable({
   providedIn: 'root',
 })
@@ -31,17 +29,17 @@ export class UserService {
       password: '123456',
     },
   ]; */
-  public item$!: Observable<User[]>;
-  public collection2: any;
+  private itemsCollection: AngularFirestoreCollection<User>;
+  items!: Observable<User[]>;
 
-  constructor(firestore: Firestore) {
-    /* this.collection2 = firestore.collection<User>(firestore, 'Users'); */
-    /* collectionData(this.collection2).subscribe(console.log); */
-    this.collection2 = collection(firestore, 'items');
-    this.item$ = collectionData(this.collection2);
+  constructor(firestore: AngularFirestore) {
+    this.itemsCollection = firestore.collection<User>('Users');
+    this.items = this.itemsCollection.valueChanges();
+    this.items.subscribe(console.log)
+
   }
   public getUsers(): Observable<User[]> {
-    this.item$ = collectionData(this.collection2);
-    return this.item$;
+
+    return this.items;
   } // getUsers
 }
