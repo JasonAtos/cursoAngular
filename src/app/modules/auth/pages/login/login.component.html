@@ -1,0 +1,23 @@
+<div class="content d-flex justify-content-center">
+  <mat-card class="login-card align-self-center ">
+    <mat-card-header >
+      <mat-card-title>Welcome</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="profileForm" (ngSubmit)="register(profileForm)">
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email">
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="visbility ? 'text' : 'password'" name="password" formControlName="password">
+          <mat-icon matSuffix (click)="showPassword()">{{visbility ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+        <div class="d-flex justify-content-center">
+          <button mat-raised-button color="primary" [disabled]="!profileForm.valid" type="submit">Log in</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

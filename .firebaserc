@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "restaurant-6efa4": {
+      "hosting": {
+        "spotiApp": [
+          "restaurant-6efa4"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "restaurant-6efa4"
+  }
+}
