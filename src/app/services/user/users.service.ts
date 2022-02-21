@@ -5,12 +5,10 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
-
-/*  import { User } from '@models/user'; */
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class UsersService {
   private itemsCollection: AngularFirestoreCollection<User>;
   items!: Observable<User[]>;
 

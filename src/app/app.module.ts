@@ -14,23 +14,25 @@ import { MaterialModule } from './material/material.module';
 import { HeaderComponent } from './template/header/header.component';
 import { FooterComponent } from './template/footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
-
+import { provideDatabase, getDatabase } from '@angular/fire/database';
+import { AngularFireModule } from '@angular/fire/compat';
+import { ROOT_REDUCERS } from './state/app.state';
+import { UsersEffects } from '@state/effects/users.effects';
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    StoreModule.forRoot({}, {}),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-      logOnly: environment.production,
-    }),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot(ROOT_REDUCERS),
+    StoreDevtoolsModule.instrument({ name: 'TEST' }),
+    EffectsModule.forRoot([UsersEffects]),
     MaterialModule,
     AppRoutingModule,
+    provideDatabase(() => getDatabase()),
   ],
   providers: [MaterialModule],
   bootstrap: [AppComponent],
