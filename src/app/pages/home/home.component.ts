@@ -4,6 +4,7 @@ import { AppState } from '@state/app.state';
 import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
 import { AddUserComponent } from './components/add-user/add-user.component';
+import { User } from '@models/user';
 
 @Component({
   selector: 'app-home',
@@ -17,9 +18,12 @@ export class HomeComponent implements OnInit {
     this.store.dispatch(loadUsers());
   }
   public openDialog() {
-    const dialogRef = this.dialog.open(AddUserComponent);
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
+    const user: User = {
+      id: '',
+      name: '',
+      email: '',
+      password: '',
+    };
+    this.dialog.open(AddUserComponent, { data: user });
   }
 }

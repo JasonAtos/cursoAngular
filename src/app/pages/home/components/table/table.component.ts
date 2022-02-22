@@ -6,6 +6,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@state/app.state';
 import { deleteUser } from '@state/actions/users.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { AddUserComponent } from '../add-user/add-user.component';
 
 @Component({
   selector: 'app-table',
@@ -23,7 +25,11 @@ export class TableComponent implements OnInit {
     'delete',
   ];
   public users$: Observable<User[]> = new Observable();
-  constructor(private store: Store<AppState>, private snackBar: MatSnackBar) {}
+  constructor(
+    private store: Store<AppState>,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
+  ) {}
   ngOnInit(): void {
     this.getUsers();
   }
@@ -32,8 +38,8 @@ export class TableComponent implements OnInit {
       .select(selectUsers)
       .subscribe((users) => (this.dataSource = users));
   }
-  public updateUser(user: string) {
-    alert(user);
+  public updateUser(user: User) {
+    this.dialog.open(AddUserComponent, { data: user });
   }
   public deleteUser(id: string) {
     if (confirm('Are you sure you want to delete this user?')) {

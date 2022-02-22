@@ -27,4 +27,7 @@ export class UsersService {
   public deleteUser(id: string): void {
     this.itemsCollection.doc(id).delete();
   }
+  public updateUser(user: User): void {
+    this.itemsCollection.doc(user.id).update(user);
+  }
 }

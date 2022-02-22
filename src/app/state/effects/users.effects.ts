@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { UserState } from '@models/state/user.state';
 import { User } from '@models/user';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UsersService } from '@services/user/users.service';
@@ -8,7 +7,6 @@ import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 @Injectable()
 export class UsersEffects {
   //TODO: Select all users - effects
-
   public loadUsers$: Observable<{
     type: string;
     users: User[];
@@ -44,6 +42,18 @@ export class UsersEffects {
         tap((action: any) => console.log(action.id)),
         map((action: any) => {
           this.userServices.deleteUser(action.id);
+        })
+      ),
+    { dispatch: false }
+  );
+  //TODOñ: Update user - effects
+  updateUser$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType('[Users] Update User'),
+        tap((action: any) => console.log(action.user)),
+        map((action: any) => {
+          this.userServices.updateUser(action.user);
         })
       ),
     { dispatch: false }
