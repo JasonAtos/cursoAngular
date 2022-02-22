@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '@models/user';
 import { selectUsers } from '@state/selectors/users.selector';
@@ -8,6 +8,8 @@ import { deleteUser } from '@state/actions/users.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { AddUserComponent } from '../add-user/add-user.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-table',
@@ -15,7 +17,7 @@ import { AddUserComponent } from '../add-user/add-user.component';
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
-  public dataSource!: User[];
+  public dataSource!: MatTableDataSource<User>;
   public displayedColumns: string[] = [
     'id',
     'name',
@@ -25,6 +27,8 @@ export class TableComponent implements OnInit {
     'delete',
   ];
   public users$: Observable<User[]> = new Observable();
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(
     private store: Store<AppState>,
     private snackBar: MatSnackBar,
@@ -34,9 +38,10 @@ export class TableComponent implements OnInit {
     this.getUsers();
   }
   public getUsers() {
-    this.store
-      .select(selectUsers)
-      .subscribe((users) => (this.dataSource = users));
+    this.store.select(selectUsers).subscribe((users: User[]) => {
+      this.dataSource = new MatTableDataSource<User>(users);
+      this.dataSource.paginator = this.paginator;
+    });
   }
   public updateUser(user: User) {
     this.dialog.open(AddUserComponent, { data: user });
@@ -47,4 +52,8 @@ export class TableComponent implements OnInit {
       this.snackBar.open('User deleted', '', { duration: 2000 });
     }
   }
+  public filtrar = (event: Event) => {
+    const filtro = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filtro.trim().toLowerCase();
+  };
 }

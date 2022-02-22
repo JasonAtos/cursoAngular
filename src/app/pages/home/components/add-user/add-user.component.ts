@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '@models/user';
 import { Store } from '@ngrx/store';
 import { addUser, updateUser } from '@state/actions/users.actions';
@@ -16,7 +17,9 @@ export class AddUserComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
-    @Inject(MAT_DIALOG_DATA) public user: User
+    public dialogRef: MatDialogRef<AddUserComponent>,
+    @Inject(MAT_DIALOG_DATA) public user: User,
+    private snackBar: MatSnackBar
   ) {}
   public method: string = 'Add';
   ngOnInit(): void {
@@ -36,8 +39,16 @@ export class AddUserComponent implements OnInit {
   }
   onSubmit = () => {
     console.log(this.formGroup.status);
-    if (this.method === 'Add')
-      this.store.dispatch(addUser({ user: this.formGroup.value }));
-    else this.store.dispatch(updateUser({ user: this.formGroup.value }));
+    if (this.formGroup.status === 'VALID') {
+      if (this.method === 'Add')
+        this.store.dispatch(addUser({ user: this.formGroup.value }));
+      else this.store.dispatch(updateUser({ user: this.formGroup.value }));
+      this.snackBar.open(`${this.method} Successfull`, '', { duration: 2000 });
+      this.dialogRef.close();
+    } else {
+      this.snackBar.open(`Fill the data correctly`, '', {
+        duration: 2000,
+      });
+    }
   };
 }

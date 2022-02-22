@@ -1,6 +1,5 @@
 import { UserState } from '@models/state/user.state';
 import { createReducer, on } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { loadUsers, LoadUserSuccess } from '../actions/users.actions';
 export const initialState: UserState = {
   users: [],
