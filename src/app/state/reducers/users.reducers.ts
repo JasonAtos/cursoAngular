@@ -7,13 +7,14 @@ export const initialState: UserState = {
   error: '',
 };
 
+//TODO: Reducers - users
 export const userReducer = createReducer(
   initialState,
-  on(loadUsers, (state) => ({ ...state, loading: true })),
+  /*  on(loadUsers, (state) => ({ ...state, loading: true })), */
   on(LoadUserSuccess, (state, { users }) => ({
     ...state,
-    loading: false,
+    /*     loading: false, */
     users,
-    error: '',
+    /*  error: '', */
   }))
 );

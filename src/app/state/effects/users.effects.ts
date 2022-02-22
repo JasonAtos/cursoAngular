@@ -15,7 +15,7 @@ export class UsersEffects {
       ofType('[Users] Load Users'),
       mergeMap(() =>
         this.userServices.getUsers().pipe(
-          map((users) => ({ type: '[Users] Load Users Success', users })),
+          map((users) => ({ type: '[Users] Load Users Success', users })), //TODO: triggers action [Users] Load Users Success with users
           catchError(() => EMPTY)
         )
       ),
@@ -46,7 +46,7 @@ export class UsersEffects {
       ),
     { dispatch: false }
   );
-  //TODOñ: Update user - effects
+  //TODO: Update user - effects
   updateUser$ = createEffect(
     () =>
       this.actions$.pipe(
