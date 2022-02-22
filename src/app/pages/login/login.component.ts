@@ -1,21 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { AuthService } from '../../services/auth.service';
+import { AppState } from '../../store/app.state';
+import { selectAuthenticated } from '../../store/selectors/app.selector';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   form: FormGroup;
-  loading = false;
-
+  autorized: Observable<boolean> = new Observable();
+  
+  
   constructor(
     fb: FormBuilder,
     private router : Router,
-    private authService:AuthService
+    private authService:AuthService,
+    private store:Store <AppState>,    
   ) {
     this.form = fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -23,29 +29,20 @@ export class LoginComponent {
     });
   }
 
-  login() {
+  ngOnInit(): void {
+    this.autorized = this.store.select(selectAuthenticated);      
+  }
+
+  login () {
     const { email, password } = this.form.value;
-    this.authService.login(email, password)
-      .then(() => {
-        this.router.navigate(['dashboard']);       
-      })
-      .catch(e => {
-        console.log(e);     
+    this.authService.login(email, password);
+
+    this.autorized.subscribe((value)=> {
+      if(value)
+        this.router.navigate(['/dashboard']);
+      else
         this.form.reset();
-
-      })
-      .finally(() => {
-        this.loading = false;
-      })
-
-    
-    // if (usuario === 'admin' && password === 'admin') {
-    //   // this.fakeLoading();
-    //   this.router.navigate(['dashboard']);
-    // } else {
-    //   // this.error();
-    //   this.form.reset();
-    // }
+    });
   }
 
   // error(){
@@ -54,12 +51,5 @@ export class LoginComponent {
   //     horizontalPosition: 'center',
   //     verticalPosition: 'bottom',
   //   });
-  // }
-
-  // fakeLoading() {
-  //   this.loading = true;
-  //   setTimeout(() => {
-  //     this.loading = false;
-  //   }, 1000);
   // }
 }

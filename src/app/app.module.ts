@@ -9,6 +9,9 @@ import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PagesModule } from './pages/pages.module';
 import { AppRoutingModule } from './app.routing.module';
+import { StoreModule } from '@ngrx/store';
+import { AppReducer } from './store/reducers/app.reducer';
+import { ROOT_REDUCERS } from './store/app.state';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,8 @@ import { AppRoutingModule } from './app.routing.module';
     AngularFirestoreModule,
     BrowserAnimationsModule,
     PagesModule,
-    AppRoutingModule, 
+    AppRoutingModule,
+    StoreModule.forRoot(ROOT_REDUCERS), 
   ],
   providers: [],
   bootstrap: [AppComponent]

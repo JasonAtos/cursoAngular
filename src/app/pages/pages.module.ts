@@ -10,6 +10,7 @@ import { WaiterComponent } from './waiter/waiter.component';
 import { KitchenComponent } from './kitchen/kitchen.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
   ],
   imports: [
+    CommonModule,
     ComponentsModule,
     RouterModule,
     MatFormFieldModule,

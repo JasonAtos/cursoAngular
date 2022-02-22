@@ -4,7 +4,7 @@ import { PagesRoutingModule } from './pages/pages-routing.module';
 import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full', },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: 'login' },
 ];
