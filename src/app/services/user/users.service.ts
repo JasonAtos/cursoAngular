@@ -24,4 +24,7 @@ export class UsersService {
   public addUser(user: User): void {
     this.itemsCollection.add(user);
   }
+  public deleteUser(id: string): void {
+    this.itemsCollection.doc(id).delete();
+  }
 }

@@ -25,13 +25,25 @@ export class UsersEffects {
     )
   );
   //TODO: Add user - effects
-  effectName$ = createEffect(
+  addUser$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType('[Users] Add User'),
         tap((action: any) => console.log(action.user)),
         map((action: any) => {
           this.userServices.addUser(action.user);
+        })
+      ),
+    { dispatch: false }
+  );
+  //TODO: Delete user - effects
+  deleteUser$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType('[Users] Delete User'),
+        tap((action: any) => console.log(action.id)),
+        map((action: any) => {
+          this.userServices.deleteUser(action.id);
         })
       ),
     { dispatch: false }

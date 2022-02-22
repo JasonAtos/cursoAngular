@@ -4,6 +4,9 @@ import { User } from '@models/user';
 import { selectUsers } from '@state/selectors/users.selector';
 import { Store } from '@ngrx/store';
 import { AppState } from '@state/app.state';
+import { deleteUser } from '@state/actions/users.actions';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -20,7 +23,7 @@ export class TableComponent implements OnInit {
     'delete',
   ];
   public users$: Observable<User[]> = new Observable();
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private snackBar: MatSnackBar) {}
   ngOnInit(): void {
     this.getUsers();
   }
@@ -32,7 +35,10 @@ export class TableComponent implements OnInit {
   public updateUser(user: string) {
     alert(user);
   }
-  public deleteUser(user: string) {
-    alert(user);
+  public deleteUser(id: string) {
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.store.dispatch(deleteUser({ id }));
+      this.snackBar.open('User deleted', '', { duration: 2000 });
+    }
   }
 }
