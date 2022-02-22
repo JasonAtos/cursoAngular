@@ -4,7 +4,6 @@ import { userReducer } from './reducers/users.reducers';
 export interface AppState {
   users: UserState;
 }
-
 export const ROOT_REDUCERS: ActionReducerMap<AppState> = {
   users: userReducer,
 };

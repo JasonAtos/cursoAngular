@@ -7,7 +7,8 @@ import { EMPTY, Observable } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 @Injectable()
 export class UsersEffects {
-  /*  */
+  //TODO: Select all users - effects
+
   public loadUsers$: Observable<{
     type: string;
     users: User[];
@@ -22,6 +23,18 @@ export class UsersEffects {
       ),
       tap(console.log)
     )
+  );
+  //TODO: Add user - effects
+  effectName$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType('[Users] Add User'),
+        tap((action: any) => console.log(action.user)),
+        map((action: any) => {
+          this.userServices.addUser(action.user);
+        })
+      ),
+    { dispatch: false }
   );
 
   constructor(private userServices: UsersService, private actions$: Actions) {}
