@@ -19,7 +19,6 @@ import { MatTableDataSource } from '@angular/material/table';
 export class TableComponent implements OnInit {
   public dataSource!: MatTableDataSource<User>;
   public displayedColumns: string[] = [
-    'id',
     'name',
     'email',
     'password',
