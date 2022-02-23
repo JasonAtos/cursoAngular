@@ -1,16 +1,41 @@
 <mat-grid-list cols="3" rowHeight="2:1">
-    <mat-grid-tile *ngFor="let item of menu">
+    <mat-grid-tile>
         <div class="example-form" >
-            {{item.name }}
+            BreakFast
             <br>
             <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>${{item.price}}</mat-label>
-                <input matInput placeholder="Quantity" value="0" type="number" [readonly]="true" >
+                <mat-label>$50</mat-label>
+                <input matInput placeholder="Quantity" [value]="breakFastState | async" type="number" [readonly]="true" >
             </mat-form-field>
-            <button mat-flat-button color="warn">-</button>
-            <button mat-flat-button color="primary">+</button>
+            <button mat-flat-button color="warn" (click)="decrementar('1')" >-</button>
+            <button mat-flat-button color="primary" (click)="incrementar('1')" >+</button>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="example-form" >
+            Pizza
+            <br>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>$250</mat-label>
+                <input matInput placeholder="Quantity" [value]="pizzaState | async" type="number" [readonly]="true" >
+            </mat-form-field>
+            <button mat-flat-button color="warn" (click)="decrementar('2')" >-</button>
+            <button mat-flat-button color="primary" (click)="incrementar('2')" >+</button>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="example-form" >
+            Dinner
+            <br>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>$70</mat-label>
+                <input matInput placeholder="Quantity" [value]="dinnerState | async" [min]="0" type="number" [readonly]="true" >
+            </mat-form-field>
+            <button mat-flat-button color="warn" (click)="decrementar('3')" >-</button>
+            <button mat-flat-button color="primary" (click)="incrementar('3')" >+</button>
         </div>
     </mat-grid-tile>
 </mat-grid-list>
-<h2>Total: $1000</h2>
 
+
+<h2>Total: ${{totalState | async }}</h2>

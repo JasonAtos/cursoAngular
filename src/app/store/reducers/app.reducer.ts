@@ -15,7 +15,6 @@ export const AppReducer = createReducer(
         return {...state, authenticated: status};
     }),
     on(logout, (state) => {
-        debugger;
         return {...state, authenticated: false}
     }),
 );
