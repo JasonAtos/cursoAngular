@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 import {MatFormFieldModule } from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatGridListModule} from '@angular/material/grid-list';
 import { ComponentsModule } from '../components/components.module';
 import { DashboardComponent } from './dashboard/home.component';
 import { PagesComponent } from './pages.component';
@@ -27,7 +29,9 @@ import { CommonModule } from '@angular/common';
     MatFormFieldModule,
     MatCardModule,
     MatInputModule,
-    ReactiveFormsModule,
+    MatGridListModule,
+    MatButtonModule,
+    ReactiveFormsModule,  
   ],
   exports: [
     DashboardComponent,

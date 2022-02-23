@@ -11,7 +11,7 @@ const routes: Routes = [
     path: 'dashboard',
     component: PagesComponent,
     children: [
-      { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
+      { path: '', component: DashboardComponent, /*canActivate: [AuthGuard] */ },
       { path: 'waiter', component: WaiterComponent },
       { path: 'kitchen', component: KitchenComponent },
       { path: '**', redirectTo: 'dashboard' },

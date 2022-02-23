@@ -1,1 +1,16 @@
-<p>waiter works!</p>
+<mat-grid-list cols="3" rowHeight="2:1">
+    <mat-grid-tile *ngFor="let item of menu">
+        <div class="example-form" >
+            {{item.name }}
+            <br>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>${{item.price}}</mat-label>
+                <input matInput placeholder="Quantity" value="0" type="number" [readonly]="true" >
+            </mat-form-field>
+            <button mat-flat-button color="warn">-</button>
+            <button mat-flat-button color="primary">+</button>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
+<h2>Total: $1000</h2>
+
