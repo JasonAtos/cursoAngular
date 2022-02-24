@@ -10,9 +10,9 @@ export const initialOrderState: OrderState = {
 export const OrderReducer = createReducer(
   initialOrderState,
   on(
-    loadInitialOrderState,
-    flushProductsFromState,
-    resetOrderState
+    loadInitialOrderState, // * @ actions
+    flushProductsFromState, // * @ actions
+    resetOrderState // * @ callback 
   ),
   on(addProductToOrder, appendProduct),
   on(removeProductFromOrder, removeProduct)

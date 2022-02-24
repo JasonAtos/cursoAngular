@@ -12,5 +12,4 @@ export const loadSession = createAction(
 
 export const flushSession = createAction(
   "[User Session State] Flush session",
-  props<UserState>(), //  * @ no need for props
 )

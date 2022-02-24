@@ -1,19 +1,26 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { BehaviorSubject, from, Observable, switchMap, throwError } from 'rxjs';
+import { from, Observable, of, share, Subject, switchMap, takeUntil, throwError } from 'rxjs';
 import 'firebase/compat/auth';
 import { User } from '../models/user.models';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Store } from '@ngrx/store';
+import { flushSession, loadSession } from '../state/actions/user.actions';
+import { Router } from '@angular/router';
+import * as firebase from 'firebase/compat';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' // * @ singleton <-
 })
 export class AuthService {
-
-  public user$:BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null); // * @ real time user
+  private persistenceHook: Subject<void> = new Subject<void>();
   constructor(
     private readonly authFire: AngularFireAuth,
-    private readonly firestore: AngularFirestore
-  ) { }
+    private readonly firestore: AngularFirestore,
+    private readonly store: Store,
+    private readonly router: Router,
+  ) {
+    this.checkIfLoggedIn();
+  }
 
   public signIn(email: string, password: string): void {
     this.signInWithEmailAndPassword(email, password).pipe(switchMap(
@@ -24,7 +31,46 @@ export class AuthService {
           return throwError(() => this.userDoesNotExist());
         }
       }
-    )).subscribe(console.log);
+    )).subscribe({
+      next: (user: User) => {
+        this.dispatchUser(user);
+      }
+    });
+  }
+
+  public checkIfLoggedIn(): void {
+    this.persistenceUser().pipe(takeUntil(this.persistenceHook)).subscribe({
+      next: (user) => {
+        if (user) {
+          this.dispatchUser(user);
+        }
+        else {
+          this.persistenceHook.next();
+          this.persistenceHook.complete();
+        }
+      }
+    })
+  }
+
+  private async dispatchUser(user: User): Promise<void> {
+    //* @ dispatch loadSession action if needed
+    if (user.roles.waiter || user.roles.kitchen) {
+      this.store.dispatch(loadSession({
+        session: true,
+        user: { ...user }
+      }));
+      if (user.roles.waiter) {
+        
+      } else {
+        console.log("im a kitchen worker")
+      }
+    } else {
+      this.safeSignOut();
+    }
+  }
+
+  private persistenceUser(): Observable<User | null> {
+    return this.authFire.authState.pipe(switchMap((persistedUser) => persistedUser ? this.retrieveUserbyUid(persistedUser.uid) : of(null)));
   }
 
   private signInWithEmailAndPassword(email: string, password: string): Observable<firebase.default.auth.UserCredential> {
@@ -39,5 +85,16 @@ export class AuthService {
     return new Error('This user doesn\'t exist');
   }
 
+  public async safeSignOut(): Promise<void> {
+    try {
+      await this.authFire.signOut();
+      this.store.dispatch(flushSession());
+      this.router.navigate(['/']);
+      this.persistenceHook.next();
+      this.persistenceHook.complete();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
 }

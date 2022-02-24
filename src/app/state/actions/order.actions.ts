@@ -51,6 +51,7 @@ export function appendProduct<T extends string>(prevState: OrderState, action: F
   };
 }
 
+
 export function removeProduct<T extends string>(prevState: OrderState, action: indexedProduct & TypedAction<T>): OrderState {
   const filteredItems: Array<Food> = prevState.foodItems.filter((_, i) => i !== action.productIndex);
   return {
@@ -59,9 +60,10 @@ export function removeProduct<T extends string>(prevState: OrderState, action: i
   };
 }
 
-export function resetOrderState<T extends string>(_:OrderState, action:TypedAction<T>):OrderState {
+export function resetOrderState<T extends string>(_: OrderState, action: TypedAction<T>): OrderState {
   return {
     ...action,
     ...initialOrderState,
   };
 }
+

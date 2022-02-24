@@ -5,5 +5,13 @@
   .form-wrapper {
     border: 1px solid white;
     padding: 2em;
+    .title {
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+
+    }
   }
 }
