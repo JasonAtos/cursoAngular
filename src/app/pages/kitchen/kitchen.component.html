@@ -1,1 +1,22 @@
-<p>kitchen works!</p>
+<mat-toolbar color="primary">
+  <section class="nav-bar">
+    <div>
+      <span>Kitchen</span>
+    </div>
+    <div class="navigation">
+      <button mat-raised-button type="button" color="basic" routerLink="home">
+        Orders
+      </button>
+      <button mat-raised-button type="button" color="basic" routerLink="completed-orders">
+        Done Orders
+      </button>
+      <button mat-raised-button type="button" color="accent" routerLink="menu">
+        Menu
+      </button>
+    </div>
+  </section>
+</mat-toolbar>
+
+<section class="kitchen-virtual-body">
+  <router-outlet></router-outlet>
+</section>

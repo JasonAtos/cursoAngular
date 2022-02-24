@@ -17,12 +17,18 @@ import { MaterialModule } from './modules/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KitchenComponent } from './pages/kitchen/kitchen.component';
 import { WaiterComponent } from './pages/waiter/waiter.component';
+import { KitchenHomeComponent } from './pages/kitchen/kitchen-home/kitchen-home.component';
+import { KitchenDoneOrdersComponent } from './pages/kitchen/kitchen-done-orders/kitchen-done-orders.component';
+import { MenuComponent } from './pages/kitchen/menu/menu.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     KitchenComponent,
-    WaiterComponent
+    WaiterComponent,
+    KitchenHomeComponent,
+    KitchenDoneOrdersComponent,
+    MenuComponent
   ],
   imports: [
     RouterModule,

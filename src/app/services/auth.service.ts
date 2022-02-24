@@ -52,17 +52,16 @@ export class AuthService {
     })
   }
 
-  private async dispatchUser(user: User): Promise<void> {
-    //* @ dispatch loadSession action if needed
+  private dispatchUser(user: User): void {
     if (user.roles.waiter || user.roles.kitchen) {
       this.store.dispatch(loadSession({
         session: true,
         user: { ...user }
       }));
       if (user.roles.waiter) {
-        
+        this.router.navigate(['/waiter']);
       } else {
-        console.log("im a kitchen worker")
+        this.router.navigate(['/kitchen']);
       }
     } else {
       this.safeSignOut();

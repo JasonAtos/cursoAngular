@@ -29,15 +29,15 @@ export const selectUserInformation = createSelector(
  */
 export const selectUserRoles = createSelector(
   userSelector,
-  (state: UserState) => state.user.roles
+  (state: UserState) => state.user?.roles
 )
 
 export const selectUserIsKitchen = createSelector(
   userSelector,
-  (state: UserState) => state.user.roles.kitchen
+  (state: UserState) => state.user?.roles.kitchen
 );
 
 export const selectUserIsWaiter = createSelector(
   userSelector,
-  (state:UserState) => state.user.roles.waiter
+  (state:UserState) => state.user?.roles.waiter
 );
