@@ -23,3 +23,8 @@ export const selectTotal = createSelector(
     selectBillFeature,
     (state: BillState) => state.total
 );
+
+export const selectBill = createSelector(
+    selectBillFeature,
+    (state: BillState) => state
+)

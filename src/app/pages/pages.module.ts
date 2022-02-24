@@ -5,6 +5,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatListModule} from '@angular/material/list';
 import { ComponentsModule } from '../components/components.module';
 import { DashboardComponent } from './dashboard/home.component';
 import { PagesComponent } from './pages.component';
@@ -31,7 +32,8 @@ import { CommonModule } from '@angular/common';
     MatInputModule,
     MatGridListModule,
     MatButtonModule,
-    ReactiveFormsModule,  
+    ReactiveFormsModule,
+    MatListModule, 
   ],
   exports: [
     DashboardComponent,

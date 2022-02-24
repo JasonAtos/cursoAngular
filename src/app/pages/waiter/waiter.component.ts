@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, map, combineLatest } from 'rxjs';
+import { Observable} from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectPizza, selectBreakFast, selectDinner, selectTotal } from '../../store/selectors/bill.selector';
-import { manageBill } from '../../store/actions/bill.actions';
+import { selectPizza, selectBreakFast, selectDinner, selectTotal, selectBill } from '../../store/selectors/bill.selector';
+import { manageBill, resetBill } from '../../store/actions/bill.actions';
+import { BillState } from '../../interfaces/bill.state';
+import { addOrder } from '../../store/actions/queue.actions';
+import { Food } from '../../interfaces/food.model';
+import { PagesService } from '../../services/pages.service';
 
 @Component({
   selector: 'app-waiter',
@@ -14,43 +18,40 @@ export class WaiterComponent implements OnInit {
   pizzaState: Observable<number> = new Observable();
   dinnerState: Observable<number> = new Observable();
   totalState: Observable<number> = new Observable();
+  billState: Observable<BillState> = new Observable();
+  data: Food[];
 
   constructor(
+    private pageService: PagesService,
     private store: Store<any>,
   ) {
-   }
+    this.data = pageService.getData();
+  }
 
    ngOnInit(): void {
      this.breakFastState = this.store.select(selectBreakFast);
      this.pizzaState = this.store.select(selectPizza);
      this.dinnerState = this.store.select(selectDinner);
      this.totalState = this.store.select(selectTotal);
+     this.billState = this.store.select(selectBill);
    }
 
   incrementar(id: string){
-    // combineLatest([this.breakFastState, this.pizzaState, this.dinnerState])
-    // .subscribe((z,x,c) =>{
-    //   console.log(z,x,c);      
-    // })
-    // .pipe(
-    //   map(([breakFast, pizza, dinner]) => {
-    //     this.validator(breakFast);
-    //     this.validator(pizza);
-    //     this.validator(dinner);
-    //   })
-    // )
     this.store.dispatch(manageBill({id, plus: true}));
-    
   }
 
   decrementar(id: string){
-    //si <0 entonces nel
     this.store.dispatch(manageBill({id, plus: false}));
   }
 
-  validator(value:any){
-    console.log(value);
-    
+  confirm(launch = false){
+    this.billState.subscribe((order: BillState) => {
+     if (launch && order.total > 0){
+       this.store.dispatch(addOrder({order}));
+       this.store.dispatch(resetBill());
+      }
+      launch = false;
+    })
   }
 
 }

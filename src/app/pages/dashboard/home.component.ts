@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PagesService } from '../../services/pages.service';
 import { Food } from '../../interfaces/food.model';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectBreakFast, selectPizza, selectDinner } from '../../store/selectors/bill.selector';
 
 @Component({
   selector: 'app-home',
@@ -9,18 +12,22 @@ import { Food } from '../../interfaces/food.model';
 })
 export class DashboardComponent implements OnInit {
 
+  breakFastState: Observable<number> = new Observable();
+  pizzaState: Observable<number> = new Observable();
+  dinnerState: Observable<number> = new Observable();
   data: Food[];
-
-  longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
-  from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
-  originally bred for hunting.`;
 
   constructor(
     private pageService: PagesService,
+    private store: Store<any>,
+
   ) {
     this.data = pageService.getData();
    }
 
   ngOnInit(): void {
+    this.breakFastState = this.store.select(selectBreakFast);
+    this.pizzaState = this.store.select(selectPizza);
+    this.dinnerState = this.store.select(selectDinner);
   }
 }

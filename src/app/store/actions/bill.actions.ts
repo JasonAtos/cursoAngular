@@ -9,3 +9,7 @@ export const calculateTotal = createAction(
     '[Bill Collection] CalculateTotal',
     props<{id: string}>()
 );
+
+export const resetBill = createAction(
+    '[Bill Collection] ResetBill'
+)

@@ -11,10 +11,14 @@
   }
 
   mat-grid-tile {
-    background: lightblue;
+    background: whitesmoke;
   }
 
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+
+  .waiter-footer{
+    text-align: center;
   }

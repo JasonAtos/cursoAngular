@@ -1,1 +1,22 @@
-<p>kitchen works!</p>
+<h2>Order List</h2>
+
+<mat-grid-list cols="3" rowHeight="2:1">
+    <mat-grid-tile *ngFor="let item of bills; let i = index">
+        <div class="example-form" >    
+            <mat-card-header>
+                <h1>Bill {{i}}</h1>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-list role="list">
+                    <mat-list-item role="listitem">Break Fast: {{item.orders.breakFast}}</mat-list-item>
+                    <mat-list-item role="listitem">Pizza: {{item.orders.pizza}}</mat-list-item>
+                    <mat-list-item role="listitem">Dinner: {{item.orders.dinner}}</mat-list-item>
+                </mat-list>
+            </mat-card-content>
+            <button mat-flat-button color="primary" (click)="finishOrder(i)">Order ready</button>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<!-- <h3>{{queueState | async | json}}</h3>
+<h1>{{x}}</h1> -->
