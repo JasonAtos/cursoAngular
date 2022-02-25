@@ -1,16 +1,17 @@
 import { HomeModule } from './modules/home/home.module';
-import { UsersComponent } from './modules/home/components/users/users.component';
 import { LoginComponent } from './modules/auth/pages/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserGuardGuard } from './guards/user-guard.guard';
+import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/compat/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
   {
     path: '',
-    component: UsersComponent,
     loadChildren: ()=>import(`./modules/home/home.module`).then(m => m.HomeModule),
-    canActivate: [UserGuardGuard]
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
     path: 'login',

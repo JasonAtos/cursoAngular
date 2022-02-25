@@ -10,3 +10,7 @@ export const loadSession = createAction(
   "[Login] Load Session",
   props<userState>()
 )
+export const loadUser = createAction(
+  "[Login] Load User",
+  props<userState>()
+)

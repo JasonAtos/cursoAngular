@@ -1,16 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersComponent } from './components/users/users.component';
-import { SharedModule } from 'src/app/shared/shared/shared.module';
 
+import { HomeRoutingModule } from './home-routing.module';
+import { KitchenComponent } from './components/kitchen/kitchen.component';
+import { WaiterComponent } from './components/waiter/waiter.component';
+import { SharedModule } from 'src/app/shared/shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    UsersComponent
+    KitchenComponent,
+    WaiterComponent
   ],
   imports: [
     CommonModule,
+    HomeRoutingModule,
     SharedModule
   ]
 })

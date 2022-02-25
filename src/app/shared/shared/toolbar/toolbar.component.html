@@ -1,5 +1,9 @@
-<p>
+
   <mat-toolbar color="primary">
     <span>{{user!.name}}</span>
+
+    <button mat-raised-button (click)="logOut()">
+      Log Out
+    </button>
   </mat-toolbar>
-</p>
+

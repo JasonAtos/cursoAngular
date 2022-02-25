@@ -14,6 +14,7 @@ import { StoreModule } from '@ngrx/store';
 import { APP_ROOT_STATE_REDUCERS } from './state/state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { PERSISTENCE } from '@angular/fire/compat/auth';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { EffectsModule } from '@ngrx/effects';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([])
   ],
-  providers: [],
+  providers: [
+    { provide: PERSISTENCE, useValue: 'session' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

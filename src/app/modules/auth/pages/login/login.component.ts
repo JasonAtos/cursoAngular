@@ -30,9 +30,4 @@ export class LoginComponent implements OnInit {
     const password = signForm.value.password;
     this.auth.login(email, password);
   }
-  register(signForm: FormGroup) {
-    const email = signForm.value.email;
-    const password = signForm.value.password;
-    this.auth.register(email, password, this.user);
-  }
 }
