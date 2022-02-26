@@ -18,6 +18,7 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire/compat';
 import { ROOT_REDUCERS } from './state/app.state';
 import { UsersEffects } from '@state/effects/users.effects';
+import { LoginEffects } from '@state/effects/login.effects';
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
   imports: [
@@ -29,7 +30,7 @@ import { UsersEffects } from '@state/effects/users.effects';
     provideFirestore(() => getFirestore()),
     StoreModule.forRoot(ROOT_REDUCERS),
     StoreDevtoolsModule.instrument({ name: 'TEST' }),
-    EffectsModule.forRoot([UsersEffects]),
+    EffectsModule.forRoot([UsersEffects, LoginEffects]),
     MaterialModule,
     AppRoutingModule,
     provideDatabase(() => getDatabase()),

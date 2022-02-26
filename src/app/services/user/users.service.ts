@@ -5,15 +5,16 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-  private itemsCollection: AngularFirestoreCollection<User>;
-  items!: Observable<User[]>;
+  private itemsCollection: AngularFirestoreCollection<Omit<User, 'id'>>;
+  private items!: Observable<User[]>;
 
-  constructor(firestore: AngularFirestore) {
-    this.itemsCollection = firestore.collection<User>('Users');
+  constructor(firestore: AngularFirestore, private fireAuth: AngularFireAuth) {
+    this.itemsCollection = firestore.collection<Omit<User, 'id'>>('Users');
   }
   // TODO - GET USERS
   public getUsers(): Observable<User[]> {
@@ -22,8 +23,18 @@ export class UsersService {
     return this.items;
   }
   //TODO - ADD USERS
-  public addUser(user: User): void {
-    this.itemsCollection.add(user);
+  public async addUser(user: User): Promise<void> {
+    try {
+      const resUser = await this.registerUser(user);
+      this.itemsCollection.doc(resUser.user.uid).set({
+        email: user.email,
+        name: user.name,
+        role: user.role,
+      });
+      console.log('User added');
+    } catch {
+      console.log('error');
+    }
   }
   //TODO - DELETE USERS
   public deleteUser(id: string): void {
@@ -31,6 +42,13 @@ export class UsersService {
   }
   //TODO - UPDATE USERS
   public updateUser(user: User): void {
-    this.itemsCollection.doc(user.id).update(user);
+    this.itemsCollection.doc(user.email).update(user);
+  }
+  //TODO - REGISTER USER - FIREBASE AUTH
+  private registerUser(user: User): Promise<any> {
+    return this.fireAuth.createUserWithEmailAndPassword(
+      user.email,
+      user.password!
+    );
   }
 }

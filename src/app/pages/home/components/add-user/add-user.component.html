@@ -4,18 +4,20 @@
       <mat-label>Name</mat-label>
       <input matInput type="text" formControlName="name" placeholder="Name" />
     </mat-form-field>
-    <p></p>
 
-    <mat-form-field appearance="fill" class="input">
-      <mat-label>Email</mat-label>
-      <input
-        matInput
-        type="email"
-        formControlName="email"
-        placeholder="Email"
-      />
-    </mat-form-field>
-    <p></p>
+    <br />
+    <div *ngIf="method === 'Add'">
+      <mat-form-field appearance="fill" class="input">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          formControlName="email"
+          placeholder="Email"
+        />
+      </mat-form-field>
+      <br />
+    </div>
 
     <mat-form-field appearance="fill" class="input">
       <mat-label>Password</mat-label>
@@ -27,7 +29,15 @@
       />
     </mat-form-field>
 
-    <p></p>
+    <br />
+    <mat-form-field appearance="fill">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role" name="role">
+        <mat-option value="waiter"> Waiter </mat-option>
+        <mat-option value="kitchen"> Kitchen </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br />
     <button mat-raised-button color="primary" (click)="onSubmit()">
       {{ method }}
     </button>

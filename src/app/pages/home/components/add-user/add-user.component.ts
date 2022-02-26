@@ -32,9 +32,10 @@ export class AddUserComponent implements OnInit {
   private buildForm() {
     this.formGroup = this.formBuilder.group({
       id: this.user.id,
-      name: this.user.name,
+      name: [this.user.name, Validators.required],
       email: [this.user.email, Validators.email],
-      password: this.user.password,
+      password: [this.user.password, Validators.required],
+      role: [this.user.role, Validators.required],
     });
   }
   onSubmit = () => {
@@ -43,6 +44,7 @@ export class AddUserComponent implements OnInit {
       if (this.method === 'Add')
         this.store.dispatch(addUser({ user: this.formGroup.value }));
       else this.store.dispatch(updateUser({ user: this.formGroup.value }));
+
       this.snackBar.open(`${this.method} Successfull`, '', { duration: 2000 });
       this.dialogRef.close();
     } else {

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { login } from '@state/actions/login.actions';
+import { AppState } from '@state/app.state';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,7 +12,10 @@ export class LoginComponent implements OnInit {
   public formGroup!: FormGroup;
   public hide = true;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit(): void {
     this.buildForm();
@@ -31,6 +37,11 @@ export class LoginComponent implements OnInit {
   public onSubmit() {
     console.log(this.formGroup.status);
     if (this.formGroup.status === 'VALID') {
+      const user: { email: string; password: string } = {
+        email: this.formGroup.value.email,
+        password: this.formGroup.value.password,
+      };
+      this.store.dispatch(login({ user }));
       console.log(this.formGroup.value);
     }
   }

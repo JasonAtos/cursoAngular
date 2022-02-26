@@ -21,7 +21,7 @@ export class TableComponent implements OnInit {
   public displayedColumns: string[] = [
     'name',
     'email',
-    'password',
+    'role',
     'update',
     'delete',
   ];
