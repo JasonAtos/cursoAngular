@@ -31,7 +31,8 @@ export class AuthService {
           return throwError(() => this.userDoesNotExist());
         }
       }
-    )).subscribe({
+    ))
+    .subscribe({
       next: (user: User) => {
         this.dispatchUser(user);
       }
@@ -39,7 +40,8 @@ export class AuthService {
   }
 
   public checkIfLoggedIn(): void {
-    this.persistenceUser().pipe(takeUntil(this.persistenceHook)).subscribe({
+    this.persistenceUser().pipe(takeUntil(this.persistenceHook))
+    .subscribe({
       next: (user) => {
         if (user) {
           this.dispatchUser(user);

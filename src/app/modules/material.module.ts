@@ -4,6 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
+import { CdkTableModule } from '@angular/cdk/table';
 @NgModule({
   imports: [
     MatInputModule,
@@ -11,13 +12,15 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     MatToolbarModule,
     MatCardModule,
+    CdkTableModule,
   ],
   exports: [
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
     MatToolbarModule,
-    MatCardModule
+    MatCardModule,
+    CdkTableModule
   ]
 })
 export class MaterialModule { }
