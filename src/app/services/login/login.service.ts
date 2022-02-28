@@ -6,6 +6,8 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { User } from '@models/user';
+import { AuthService } from '@services/auth/auth.service';
+import { auth } from '@state/actions/login.actions';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -16,7 +18,11 @@ export class LoginService {
   //  private items!: Observable<User>;
   private items!: Observable<any>;
 
-  constructor(private fireAuth: AngularFireAuth, firestore: AngularFirestore) {
+  constructor(
+    private fireAuth: AngularFireAuth,
+    firestore: AngularFirestore,
+    private auth: AuthService
+  ) {
     this.itemsCollection = firestore.collection<User>('Users');
   }
   // TODO - LOGIN USER
@@ -24,6 +30,7 @@ export class LoginService {
     try {
       console.log('login success');
       this.fireAuth.setPersistence('local');
+      this.auth.auth();
       return await this.fireAuth.signInWithEmailAndPassword(
         user.email,
         user.password!

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '@models/user';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { AuthService } from '@services/auth/auth.service';
 import { LoginService } from '@services/login/login.service';
 import { catchError, EMPTY, map, mergeMap, Observable, tap } from 'rxjs';
 
@@ -21,6 +22,7 @@ export class LoginEffects {
           catchError(() => EMPTY)
         ) */
         ),
+        tap((res) => this.auth.auth()),
         tap(console.log)
       ),
     { dispatch: false }
@@ -39,5 +41,9 @@ export class LoginEffects {
     )
   );
 
-  constructor(private actions$: Actions, private loginServices: LoginService) {}
+  constructor(
+    private actions$: Actions,
+    private loginServices: LoginService,
+    private auth: AuthService
+  ) {}
 }

@@ -15,7 +15,7 @@ import { map, Observable } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
   constructor(private store: Store<AppState>, private dialog: MatDialog) {}
-  public userName$: Observable<String> = this.store.select(selectUserName).pipe(
+  public userName$: Observable<string> = this.store.select(selectUserName).pipe(
     map((user: User) => {
       return user.name;
     })

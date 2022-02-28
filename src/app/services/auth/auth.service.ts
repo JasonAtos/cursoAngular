@@ -8,10 +8,14 @@ import { AppState } from '@state/app.state';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(fireAuth: AngularFireAuth, private store: Store<AppState>) {
-    fireAuth.authState.subscribe((storedSession) => {
+  constructor(
+    private fireAuth: AngularFireAuth,
+    private store: Store<AppState>
+  ) {}
+  public auth(): void {
+    this.fireAuth.authState.subscribe((storedSession) => {
       if (storedSession) {
-        store.dispatch(auth({ uid: storedSession.uid! }));
+        this.store.dispatch(auth({ uid: storedSession.uid! }));
         console.log('sotredSession', storedSession);
       }
     });
