@@ -16,7 +16,7 @@ export class AuthService {
     this.fireAuth.authState.subscribe((storedSession) => {
       if (storedSession) {
         this.store.dispatch(auth({ uid: storedSession.uid! }));
-        console.log('sotredSession', storedSession);
+        /*     console.log('sotredSession', storedSession); */
       }
     });
   }

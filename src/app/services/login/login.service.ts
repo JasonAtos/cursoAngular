@@ -29,12 +29,12 @@ export class LoginService {
   public async login(user: Pick<User, 'email' | 'password'>): Promise<any> {
     try {
       console.log('login success');
-      this.fireAuth.setPersistence('local');
-      this.auth.auth();
-      return await this.fireAuth.signInWithEmailAndPassword(
+      const res = await this.fireAuth.signInWithEmailAndPassword(
         user.email,
         user.password!
       );
+      this.fireAuth.setPersistence('local');
+      return res;
     } catch (error) {
       console.log(error);
       return null;

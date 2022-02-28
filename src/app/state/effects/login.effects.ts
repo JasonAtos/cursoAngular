@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '@models/user';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthService } from '@services/auth/auth.service';
@@ -22,7 +23,10 @@ export class LoginEffects {
           catchError(() => EMPTY)
         ) */
         ),
-        tap((res) => this.auth.auth()),
+        tap((res) => {
+          this.auth.auth();
+          this.router.navigate(['/home']);
+        }),
         tap(console.log)
       ),
     { dispatch: false }
@@ -44,6 +48,7 @@ export class LoginEffects {
   constructor(
     private actions$: Actions,
     private loginServices: LoginService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {}
 }

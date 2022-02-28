@@ -19,7 +19,7 @@ export class UsersService {
   // TODO - GET USERS
   public getUsers(): Observable<User[]> {
     this.items = this.itemsCollection.valueChanges({ idField: 'id' });
-    this.items.subscribe(console.log);
+    /*   this.items.subscribe(console.log); */
     return this.items;
   }
   //TODO - ADD USERS

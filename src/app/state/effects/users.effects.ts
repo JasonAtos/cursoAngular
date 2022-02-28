@@ -18,8 +18,7 @@ export class UsersEffects {
           map((users) => ({ type: '[Users] Load Users Success', users })), //TODO: triggers action [Users] Load Users Success with users
           catchError(() => EMPTY)
         )
-      ),
-      tap(console.log)
+      )
     )
   );
   //TODO: Add user - effects
