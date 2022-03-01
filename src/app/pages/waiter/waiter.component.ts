@@ -7,6 +7,8 @@ import { BillState } from '../../interfaces/bill.state';
 import { addOrder } from '../../store/actions/queue.actions';
 import { Food } from '../../interfaces/food.model';
 import { PagesService } from '../../services/pages.service';
+import { loadData } from '../../store/actions/data.actions';
+import { selectData, selectLoading } from '../../store/selectors/data.selector';
 
 @Component({
   selector: 'app-waiter',
@@ -19,13 +21,18 @@ export class WaiterComponent implements OnInit {
   dinnerState: Observable<number> = new Observable();
   totalState: Observable<number> = new Observable();
   billState: Observable<BillState> = new Observable();
-  data: Food[];
+  // data: Food[];
+  data: Observable<any> = new Observable();
+  loading: Observable<boolean> = new Observable();
 
   constructor(
     private pageService: PagesService,
     private store: Store<any>,
   ) {
-    this.data = pageService.getData();
+    // this.data = pageService.getData();
+    //el efecto, hace que en lugar de llamar al service, este pendiente, y se dispara
+    //sin tener que llamar el service aqui, con el fin de que el componente quede
+    //lo mas puro posible
   }
 
    ngOnInit(): void {
@@ -34,6 +41,9 @@ export class WaiterComponent implements OnInit {
      this.dinnerState = this.store.select(selectDinner);
      this.totalState = this.store.select(selectTotal);
      this.billState = this.store.select(selectBill);
+     this.store.dispatch(loadData());
+     this.data = this.store.select(selectData);
+     this.loading = this.store.select(selectLoading);
    }
 
   incrementar(id: string){

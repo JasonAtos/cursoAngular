@@ -1,24 +1,32 @@
-<mat-grid-list cols="3" rowHeight="2:1">
-    <mat-grid-tile *ngFor="let item of data" >
-        <div class="example-form" >
-            {{item.name}}
-            <br>
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>${{item.price}}</mat-label>
-                <div [ngSwitch]="item.id">
-                    <input *ngSwitchCase="1" matInput placeholder="Quantity" [value]="breakFastState | async" type="number" [readonly]="true" >
-                    <input *ngSwitchCase="2" matInput placeholder="Quantity" [value]="pizzaState | async" type="number" [readonly]="true" >
-                    <input *ngSwitchCase="3" matInput placeholder="Quantity" [value]="dinnerState | async" type="number" [readonly]="true" >
-                </div>
-            </mat-form-field>
-            <button mat-flat-button color="warn" (click)="decrementar(item.id)" >-</button>
-            <button mat-flat-button color="primary" (click)="incrementar(item.id)" >+</button>
-        </div>
-    </mat-grid-tile>
-</mat-grid-list>
+<div class="container" *ngIf="(loading | async)" >
+    <div class="centered-element">
+        <mat-spinner></mat-spinner>
+    </div>
+</div> 
 
-
-<div class="waiter-footer">
-    <h2>Total: ${{totalState | async }}</h2>
-    <button mat-flat-button color="primary" (click)="confirm(true)" >Confirm Order</button>
+<div  *ngIf="!(loading  | async)">
+    <mat-grid-list cols="3" rowHeight="2:1" >
+        <mat-grid-tile *ngFor="let item of data | async" >
+            <div class="example-form" >
+                {{item.name}}
+                <br>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>${{item.price}}</mat-label>
+                    <div [ngSwitch]="item.id">
+                        <input *ngSwitchCase="1" matInput placeholder="Quantity" [value]="breakFastState | async" type="number" [readonly]="true" >
+                        <input *ngSwitchCase="2" matInput placeholder="Quantity" [value]="pizzaState | async" type="number" [readonly]="true" >
+                        <input *ngSwitchCase="3" matInput placeholder="Quantity" [value]="dinnerState | async" type="number" [readonly]="true" >
+                    </div>
+                </mat-form-field>
+                <button mat-flat-button color="warn" (click)="decrementar(item.id)" >-</button>
+                <button mat-flat-button color="primary" (click)="incrementar(item.id)" >+</button>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    
+    
+    <div class="waiter-footer">
+        <h2>Total: ${{totalState | async }}</h2>
+        <button mat-flat-button color="primary" (click)="confirm(true)" >Confirm Order</button>
+    </div>
 </div>

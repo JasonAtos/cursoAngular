@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
     private store: Store<any>,
 
   ) {
-    this.data = pageService.getData();
+    this.data = pageService.getDataClassic();
    }
 
   ngOnInit(): void {

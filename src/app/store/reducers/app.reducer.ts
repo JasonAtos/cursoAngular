@@ -11,10 +11,11 @@ export const initialState: UserState =
 
 export const AppReducer = createReducer(
     initialState,
-    on(login, (state, {status}) => {
+    on(login, (state, {status}): UserState => {
         return {...state, authenticated: status};
     }),
-    on(logout, (state) => {
+    on(logout, (state): UserState => {
         return {...state, authenticated: false}
     }),
+
 );

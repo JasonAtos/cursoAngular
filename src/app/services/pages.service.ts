@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
 import { menu } from '../pages/data';
-import { BillState } from '../interfaces/bill.state';
+import { delay, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PagesService {
 
-  constructor() { }
+  getData(): Observable<any> {
+    // return menu;
+    return of(menu).pipe(
+      delay(1000) //simulates response time from server
+    )
+  }
 
-  getData() {
+  getDataClassic() {
     return menu;
   }
 
