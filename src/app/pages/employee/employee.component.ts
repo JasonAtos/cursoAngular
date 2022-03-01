@@ -1,34 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { order } from '@models/order.interface';
+import { Order } from '@models/order.interface';
+import { Store } from '@ngrx/store';
 import { OrdersService } from '@services/orders/orders.service';
-
+import { loadOrders } from '@state/actions/orders.actions';
+import { AppState } from '@state/app.state';
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
 })
 export class EmployeeComponent implements OnInit {
-  public tables: order[] = [
-    {
-      order: 0,
-      table: 0,
-      status: '',
-      items: [
-        {
-          name: '',
-          price: 0,
-          quantity: 0,
-        },
-      ],
-    },
-  ];
-  public selectedOrder!: order;
-  constructor(private orderServices: OrdersService) {}
+  public tables: Order[] = [];
+  public selectedOrder!: Order;
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.orderServices.getOrders().subscribe((res) => {
-      console.log(res);
-      this.tables = res;
-    });
+    this.store.dispatch(loadOrders());
   }
 }

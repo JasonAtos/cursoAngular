@@ -3,8 +3,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
-import { order } from '@models/order.interface';
-import { sortedChanges } from 'rxfire/firestore';
+import { Order } from '@models/order.interface';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -16,7 +15,7 @@ export class OrdersService {
   constructor(firestore: AngularFirestore) {
     this.itemsCollection = firestore.collection<any>('orders');
   }
-  public getOrders(): Observable<order[]> {
+  public getOrders(): Observable<Order[]> {
     return this.itemsCollection.valueChanges().pipe(
       map((res) => {
         return res.sort((a, b) => a.order - b.order);
@@ -24,12 +23,26 @@ export class OrdersService {
     );
   }
   public addOrder(order: number): void {
-    this.itemsCollection.doc(order.toString()).set(order);
+    console.log(order);
+    let mockUp: Order = {
+      order: 0,
+      table: order,
+      status: 'abierto',
+      items: [
+        {
+          name: 'papas',
+          price: 0,
+          quantity: 0,
+        },
+      ],
+    };
+    this.itemsCollection.doc(order.toString()).set(mockUp);
   }
+
   public deleteOrder(order: number): void {
     this.itemsCollection.doc(order.toString()).delete();
   }
-  public updateOrder(order: order): void {
+  public updateOrder(order: Order): void {
     this.itemsCollection.doc(order.order.toString()).update(order);
   }
 }

@@ -1,10 +1,10 @@
-export interface order {
+export interface Order {
   order: number;
   table: number;
   status: string;
-  items: item[];
+  items: Item[];
 }
-export interface item {
+export interface Item {
   name: string;
   price: number;
   quantity: number;

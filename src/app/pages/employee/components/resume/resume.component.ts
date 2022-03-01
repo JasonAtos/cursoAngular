@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { order } from '@models/order.interface';
+import { Order } from '@models/order.interface';
+import { Store } from '@ngrx/store';
 import { OrdersService } from '@services/orders/orders.service';
+import { AppState } from '@state/app.state';
+import { selectCurrentOrder } from '@state/selectors/orders.selector';
 
 @Component({
   selector: 'app-resume',
@@ -8,8 +11,8 @@ import { OrdersService } from '@services/orders/orders.service';
   styleUrls: ['./resume.component.scss'],
 })
 export class ResumeComponent implements OnInit {
-  public tables: order[] = [];
-  public selectedOrder: order = {
+  public tables: Order[] = [];
+  public selectedOrder: Order = {
     order: 0,
     table: 0,
     status: '',
@@ -21,8 +24,19 @@ export class ResumeComponent implements OnInit {
       },
     ],
   };
-  constructor(private orderServices: OrdersService) {}
-  ngOnInit(): void {}
+  constructor(
+    private orderServices: OrdersService,
+    private store: Store<AppState>
+  ) {}
+  ngOnInit(): void {
+    this.getOrders();
+  }
+  private getOrders(): void {
+    this.store.select(selectCurrentOrder).subscribe((res) => {
+      this.selectedOrder = res;
+      console.log(res);
+    });
+  }
   public updateTable(): void {
     this.orderServices.updateOrder(this.selectedOrder);
   }
