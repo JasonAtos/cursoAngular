@@ -1,0 +1,11 @@
+.card {
+  width: 25%;
+  margin: 10px;
+  max-height: 15em;
+}
+.flex-card {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: 80%;
+}

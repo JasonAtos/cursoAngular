@@ -19,6 +19,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { ROOT_REDUCERS } from './state/app.state';
 import { UsersEffects } from '@state/effects/users.effects';
 import { LoginEffects } from '@state/effects/login.effects';
+import { OrdersEffects } from '@state/effects/orders.effects';
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
   imports: [
@@ -30,7 +31,7 @@ import { LoginEffects } from '@state/effects/login.effects';
     provideFirestore(() => getFirestore()),
     StoreModule.forRoot(ROOT_REDUCERS),
     StoreDevtoolsModule.instrument({ name: 'TEST' }),
-    EffectsModule.forRoot([UsersEffects, LoginEffects]),
+    EffectsModule.forRoot([UsersEffects, LoginEffects, OrdersEffects]),
     MaterialModule,
     AppRoutingModule,
     provideDatabase(() => getDatabase()),

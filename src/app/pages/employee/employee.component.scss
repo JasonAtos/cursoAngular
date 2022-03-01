@@ -1,0 +1,9 @@
+.flex {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+.right {
+  width: 20%;
+  flex-flow: column nowrap;
+}

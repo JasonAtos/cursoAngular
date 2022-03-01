@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-content>
+    <div>
+      Orden {{ selectedOrder.order }}
+      <br />
+      Pedido 1
+      <br />
+      Pedido 2
+      <br />
+      Pedido 3
+      <br />
+      <button mat-raised-button color="secundary">Listo</button>
+      <button mat-raised-button color="secundary">Cerrar mesa</button>
+      <button mat-raised-button color="secundary">Abrir mesa</button>
+      <button mat-raised-button color="secundary" (click)="updateTable()">
+        Agregar Productos
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="right-child">
+  <mat-card-content>
+    5 productos
+    <br />
+    4 productos <br />
+    3 productos <br />
+    10 productos <br />
+    Total de productos pendientes
+  </mat-card-content>
+</mat-card>

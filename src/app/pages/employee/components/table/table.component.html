@@ -1,0 +1,13 @@
+<div class="flex-card">
+  <mat-card class="card" *ngFor="let item of tables" (click)="click(item)">
+    <mat-card-content>
+      <p>Mesa {{ item.order }}</p>
+      <p>Orden 1</p>
+      <p>Hora del pedido</p>
+      <p>Cantidad de productos</p>
+      <p>Total: $1000.00</p>
+      <p>Status</p>
+    </mat-card-content>
+  </mat-card>
+  <br />
+</div>
