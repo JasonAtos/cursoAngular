@@ -5,7 +5,6 @@ import { selectPizza, selectBreakFast, selectDinner, selectTotal, selectBill } f
 import { manageBill, resetBill } from '../../store/actions/bill.actions';
 import { BillState } from '../../interfaces/bill.state';
 import { addOrder } from '../../store/actions/queue.actions';
-import { Food } from '../../interfaces/food.model';
 import { PagesService } from '../../services/pages.service';
 import { loadData } from '../../store/actions/data.actions';
 import { selectData, selectLoading } from '../../store/selectors/data.selector';

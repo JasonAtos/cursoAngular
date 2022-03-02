@@ -4,7 +4,6 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/home.component';
 import { WaiterComponent } from './waiter/waiter.component';
 import { KitchenComponent } from './kitchen/kitchen.component';
-import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   {

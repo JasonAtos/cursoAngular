@@ -18,8 +18,7 @@ export const BillReducer = createReducer(
         return helper(id, state, plus);
     }),
     
-    on(resetBill, (state): BillState => {
-        state = initialState;
-        return {...state}
+    on(resetBill, (): BillState => {
+        return {...initialState}
     })
 )

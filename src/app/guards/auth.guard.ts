@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { AppState } from '../store/app.state';
 import { selectAuthenticated } from '../store/selectors/app.selector';
