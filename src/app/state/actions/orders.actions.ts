@@ -16,6 +16,10 @@ export const DeleteOrders = createAction(
   '[Orders] Delete Orders',
   props<{ order: number }>()
 );
+export const updateOrder = createAction(
+  '[Orders] Update Order',
+  props<{ order: Order }>()
+);
 export const SelectItem = createAction(
   '[Orders] Select Item',
   props<{ order: Order }>()

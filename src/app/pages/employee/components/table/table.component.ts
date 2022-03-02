@@ -13,6 +13,7 @@ import { selectOrders } from '@state/selectors/orders.selector';
 export class TableComponent implements OnInit {
   //TODO: Variables-Constants
   public tables: Order[] = [];
+  public color: string = 'red';
   //TODO: Constructor
   constructor(private store: Store<AppState>) {}
   //TODO: ngOnInit

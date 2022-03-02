@@ -40,6 +40,18 @@ export class OrdersEffects {
       ),
     { dispatch: false }
   );
+  public updateOrder$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType('[Orders] Update Order'),
+      tap((action: any) => this.ordersService.updateOrder(action.order)),
+      map((order) => ({
+        type: '[Orders] Select Item',
+        order: order.order,
+      })),
+      tap((order) => console.log(order)),
+      catchError(() => EMPTY)
+    )
+  );
   constructor(
     private actions$: Actions,
     private ordersService: OrdersService

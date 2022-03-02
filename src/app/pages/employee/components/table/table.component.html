@@ -1,5 +1,10 @@
 <div class="flex-card">
-  <mat-card class="card" *ngFor="let item of tables" (click)="click(item)">
+  <mat-card
+    class="card"
+    *ngFor="let item of tables"
+    (click)="click(item)"
+    [ngClass]="item.status"
+  >
     <mat-card-content>
       <p>Mesa {{ item.table }}</p>
       <p>Orden 1</p>

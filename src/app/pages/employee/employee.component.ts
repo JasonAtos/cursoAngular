@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from '@models/order.interface';
 import { Store } from '@ngrx/store';
-import { OrdersService } from '@services/orders/orders.service';
 import { loadOrders } from '@state/actions/orders.actions';
 import { AppState } from '@state/app.state';
 @Component({

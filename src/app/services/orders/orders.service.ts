@@ -15,6 +15,7 @@ export class OrdersService {
   constructor(firestore: AngularFirestore) {
     this.itemsCollection = firestore.collection<any>('orders');
   }
+  //TODO: getOrders
   public getOrders(): Observable<Order[]> {
     return this.itemsCollection.valueChanges().pipe(
       map((res) => {
@@ -22,12 +23,13 @@ export class OrdersService {
       })
     );
   }
+  //TODO: addOrder
   public addOrder(order: number): void {
     console.log(order);
     let mockUp: Order = {
       order: 0,
       table: order,
-      status: 'abierto',
+      status: 'open',
       items: [
         {
           name: 'papas',
@@ -38,11 +40,12 @@ export class OrdersService {
     };
     this.itemsCollection.doc(order.toString()).set(mockUp);
   }
-
+  //TODO: deleteOrder
   public deleteOrder(order: number): void {
     this.itemsCollection.doc(order.toString()).delete();
   }
+  //TODO: updateOrder
   public updateOrder(order: Order): void {
-    this.itemsCollection.doc(order.order.toString()).update(order);
+    this.itemsCollection.doc(order.table.toString()).update(order);
   }
 }
