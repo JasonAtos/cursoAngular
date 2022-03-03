@@ -15,6 +15,7 @@ import { APP_ROOT_STATE_REDUCERS } from './state/state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { PERSISTENCE } from '@angular/fire/compat/auth';
+import { ordersEffects } from './state/effects/orders.effects';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { PERSISTENCE } from '@angular/fire/compat/auth';
     AppRoutingModule,
     StoreModule.forRoot(APP_ROOT_STATE_REDUCERS),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([ordersEffects])
   ],
   providers: [
     { provide: PERSISTENCE, useValue: 'session' }

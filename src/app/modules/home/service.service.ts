@@ -1,4 +1,4 @@
-import { dessert } from './../../models/restaurant.models';
+import { dessert, orders, table } from './../../models/restaurant.models';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
@@ -21,9 +21,13 @@ export class ServiceService {
     return this.store.collection<dessert>('menu').valueChanges({ idField: 'id' });
   }
   getTables(){
-    return this.store.collection<dessert>('tables').valueChanges({ idField: 'id' });
+    return this.store.collection<table>('tables').valueChanges({ idField: 'id' });
   }
   getOrders(){
-    return this.store.collection<dessert>('orders').valueChanges({ idField: 'id' });
+    return this.store.collection<orders>('orders').valueChanges({ idField: 'id' });
+  }
+  createOrders(order: orders){
+    const ordersCollection = this.store.collection<orders>('orders');
+    ordersCollection.add(order);
   }
 }
