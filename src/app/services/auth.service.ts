@@ -6,7 +6,7 @@ import { User } from '../models/user.models';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Store } from '@ngrx/store';
 import { flushSession, loadSession } from '../state/actions/user.actions';
-import { Router } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import * as firebase from 'firebase/compat';
 @Injectable({
   providedIn: 'root' // * @ singleton <-
@@ -18,9 +18,7 @@ export class AuthService {
     private readonly firestore: AngularFirestore,
     private readonly store: Store,
     private readonly router: Router,
-  ) {
-    this.checkIfLoggedIn();
-  }
+  ) { }
 
   public signIn(email: string, password: string): void {
     this.signInWithEmailAndPassword(email, password).pipe(switchMap(
@@ -39,12 +37,13 @@ export class AuthService {
     });
   }
 
-  public checkIfLoggedIn(): void {
+  public checkIfLoggedIn(routeEnd:NavigationStart): void {
     this.persistenceUser().pipe(takeUntil(this.persistenceHook))
     .subscribe({
       next: (user) => {
         if (user) {
-          this.dispatchUser(user);
+          console.log(user,routeEnd);
+          this.dispatchUser(user,routeEnd);
         }
         else {
           this.persistenceHook.next();
@@ -54,16 +53,21 @@ export class AuthService {
     })
   }
 
-  private dispatchUser(user: User): void {
+  private dispatchUser(user: User, routeEnd?:NavigationStart): void {
     if (user.roles.waiter || user.roles.kitchen) {
       this.store.dispatch(loadSession({
         session: true,
         user: { ...user }
       }));
-      if (user.roles.waiter) {
-        this.router.navigate(['/waiter']);
+      if(routeEnd) {
+        console.log(routeEnd);
+        this.router.navigate([routeEnd.url]);
       } else {
-        this.router.navigate(['/kitchen']);
+        if (user.roles.waiter) {
+          this.router.navigate(['/waiter']);
+        } else {
+          this.router.navigate(['/kitchen']);
+        }
       }
     } else {
       this.safeSignOut();
