@@ -2,7 +2,7 @@ import {
   loadInitialSession,
   loadSession,
   loadUser,
-} from './../../state/actions';
+} from '../../state/actions/actions';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';

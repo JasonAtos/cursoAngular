@@ -1,4 +1,4 @@
-import { activeUserSelector } from '../state/selectors';
+import { activeUserSelector } from '../state/selectors/selectors';
 import { AppState } from 'src/app/state/state';
 import { Injectable } from '@angular/core';
 import {
@@ -10,7 +10,7 @@ import {
 } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { activeSessionSelector } from '../state/selectors';
+import { activeSessionSelector } from '../state/selectors/selectors';
 import { User } from '../models/user.models';
 
 @Injectable({

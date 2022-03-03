@@ -1,6 +1,6 @@
-import { userState } from './../models/user.state';
+import { userState } from '../../models/user.state';
 import { createSelector } from "@ngrx/store";
-import { AppState } from "./state";
+import { AppState } from "../state";
 
 export const selecUserSession = (state:AppState) => state.user;
 

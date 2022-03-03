@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { activeSessionSelector, activeUserSelector } from '../state/selectors';
+import { activeSessionSelector, activeUserSelector } from '../state/selectors/selectors';
 import { User } from '../models/user.models';
 import { AppState } from '../state/state';
 

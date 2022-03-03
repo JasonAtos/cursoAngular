@@ -18,6 +18,12 @@ export class ServiceService {
   ) {}
 
   getMenu(){
-    return this.store.collection<dessert>('menu').valueChanges();
+    return this.store.collection<dessert>('menu').valueChanges({ idField: 'id' });
+  }
+  getTables(){
+    return this.store.collection<dessert>('tables').valueChanges({ idField: 'id' });
+  }
+  getOrders(){
+    return this.store.collection<dessert>('orders').valueChanges({ idField: 'id' });
   }
 }

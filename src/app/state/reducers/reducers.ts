@@ -1,5 +1,5 @@
-import { userState } from './../models/user.state';
-import { loadInitialSession, loadSession, loadUser } from './actions';
+import { userState } from '../../models/user.state';
+import { loadInitialSession, loadSession, loadUser } from '../actions/actions';
 import { createReducer, on } from '@ngrx/store';
 export const initialUserState: userState = {
   session: false,

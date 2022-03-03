@@ -4,7 +4,7 @@ import { User } from './../../../models/user.models';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
-import { activeUserSelector } from 'src/app/state/selectors';
+import { activeUserSelector } from 'src/app/state/selectors/selectors';
 
 @Component({
   selector: 'app-toolbar',

@@ -1,4 +1,4 @@
-import { userState } from './../models/user.state';
+import { userState } from '../../models/user.state';
 import { createAction, props } from "@ngrx/store";
 
 

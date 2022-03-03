@@ -1,5 +1,5 @@
 import { userState } from './../models/user.state';
-import { sessionReducer } from './reducers';
+import { sessionReducer } from './reducers/reducers';
 import { ActionReducerMap } from '@ngrx/store';
 
 
