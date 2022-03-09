@@ -28,12 +28,12 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     ComponentsModule,
     RouterModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatCardModule,
     MatInputModule,
     MatGridListModule,
     MatButtonModule,
-    ReactiveFormsModule,
     MatListModule, 
     MatProgressSpinnerModule
   ],

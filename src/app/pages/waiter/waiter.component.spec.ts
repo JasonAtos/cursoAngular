@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WaiterComponent } from './waiter.component';
+import { ROOT_REDUCERS } from '../../store/app.state';
+import { StoreModule } from '@ngrx/store';
 
 describe('WaiterComponent', () => {
   let component: WaiterComponent;
@@ -8,7 +10,8 @@ describe('WaiterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WaiterComponent ]
+      declarations: [ WaiterComponent ],
+      imports:[StoreModule.forRoot(ROOT_REDUCERS)]
     })
     .compileComponents();
   });
